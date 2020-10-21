@@ -1,0 +1,29 @@
+.search-form{
+    display: flex;
+    justify-content: center;;
+    padding-top: 50px;
+    text-align: center;
+}
+.container{
+    padding: 10px;
+}
+.card{
+    border: none !important;
+}
+ .card-body{
+    border-radius: 27px;
+background: #fffffa;
+box-shadow:  10px 10px 20px #d4d4d0, 
+             -10px -10px 20px #ffffff;
+    
+    
+}
+.form-group{
+    padding: 10px 40px 10px 40px;
+    width:auto;
+    
+}
+.form-group input{
+    width:500px;
+    max-width: 100%;
+}

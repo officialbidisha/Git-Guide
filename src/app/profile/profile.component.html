@@ -1,0 +1,96 @@
+<form action="" class="search-form">
+  <div class="form-group">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter a username"
+      [(ngModel)]="username"
+      name="username"
+      (keyup.enter)="findProfile()"
+    />
+  </div>
+</form>
+<div class="container mt-3">
+  <div *ngIf="profile">
+    <div>
+      <div>
+        <div class="row">
+          <div class="col-sm-3">
+            <img
+              src="{{ profile.avatar_url }}"
+              width="250px"
+              height="250px"
+              class="rounded-circle img img-fluid mb-2"
+              alt="avatar"
+            />
+            <div class="mb-2">
+              {{ profile.name }} <small>{{ profile.login }}</small
+              ><br />
+              <span *ngIf="profile.company"
+                >Works at, {{ profile.company }}</span
+              >
+              {{ profile.location }}
+            </div>
+            <div>
+              <p>
+                <span class="badge badge-warning"
+                  >Followers {{ profile.followers }}</span
+                >&nbsp;
+                <span class="badge badge-primary"
+                  >Following {{ profile.following }}</span
+                >&nbsp;
+                <span class="badge badge-success"
+                  >Gists {{ profile.public_gists }}</span
+                >&nbsp;
+                <span class="badge badge-info"
+                  >Public Repos {{ profile.public_repos }}</span
+                >
+              </p>
+            </div>
+            <ul class="list-group">
+              <li  *ngIf="profile.bio" class="list-group-item">{{ profile.bio }}</li>
+              <li *ngIf="profile.blog" class="list-group-item">
+                <a class="text-break" href="https://{{ profile.blog }}"
+                  >https://{{ profile.blog }}</a
+                >
+              </li>
+              <li *ngIf="profile.email" class="list-group-item">
+                {{ profile.email }}
+              </li>
+            </ul>
+          <select class="form-control" id="sel1" [(ngModel)]="repository"
+          name="repository"
+          (change)="onChange()">
+            <!-- <option selected>Select Repository</option> -->
+            <option [value]="repo.name" *ngFor = "let repo of repos">{{repo.name}}</option>
+          </select>
+          <!--chart-->
+          <p-toast [style]="{marginTop: '80px'}"></p-toast>
+          <p-chart type="line" [data]="lineData" (onDataSelect)="selectData($event)"></p-chart>
+          </div>
+
+          <div class="col-sm-9">
+            <div class="row">
+              <div *ngFor="let repo of repos" class="card col-sm-5 mb-2 ml-2">
+                <div class="card-body">
+                  <span class="badge badge-primary">{{ repo.language }}</span>
+                  <h3 class="mr-5">{{ repo.name }}</h3>
+                  <p>
+                    {{ repo.description }}
+                  </p>
+                  <small class="text-secondary"
+                    >Fork:{{ repo.forks_count }} Push: Created:{{
+                      repo.created_at | date
+                    }}
+                    Updated:</small
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
