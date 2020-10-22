@@ -68,21 +68,27 @@
           <p-toast [style]="{marginTop: '80px'}"></p-toast>
           <p-chart type="line" [data]="lineData" (onDataSelect)="selectData($event)"></p-chart>
           </div>
+          <!--first chart-->
 
           <div class="col-sm-9">
             <div class="row">
-              <div *ngFor="let repo of repos" class="card col-sm-5 mb-2 ml-2">
+              <div *ngFor="let repo of repos" class="card col-sm-5 mb-4 ml-3">
                 <div class="card-body">
                   <span class="badge badge-primary">{{ repo.language }}</span>
                   <h3 class="mr-5">{{ repo.name }}</h3>
                   <p>
                     {{ repo.description }}
                   </p>
+                  
+                  <a href="{{repo.html_url}}">View Repository</a><br>
                   <small class="text-secondary"
-                    >Fork:{{ repo.forks_count }} Push: Created:{{
+                    > Created:{{
                       repo.created_at | date
-                    }}
-                    Updated:</small
+                    }} &nbsp;
+                    Updated:{{repo.updated_at | date}} &nbsp;
+                    Push:{{repo.pushed_at |date}} &nbsp;
+                    Forks:{{repo.forks_count}}
+                    </small
                   >
                 </div>
               </div>

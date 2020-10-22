@@ -8,11 +8,11 @@ import { HttpClientModule } from '@angular/common/http';
 import {ChartModule} from 'primeng/chart';
 
 import { FormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     AppComponent,
-    ProfileComponent
-
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
