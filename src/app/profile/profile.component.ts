@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { GitservicesService} from '../gitservices.service';
+import { ThemeService } from "src/app/theme/theme.service";
+import {
+  faLightbulb as faSolidLightbulb,
+  faDollarSign,
+  IconDefinition
+} from "@fortawesome/free-solid-svg-icons";
+import { faLightbulb as faRegularLightbulb } from "@fortawesome/free-regular-svg-icons";
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -10,10 +17,15 @@ export class ProfileComponent implements OnInit {
   repos;
   username:string;
   repository:string;
+  faLightbulb: IconDefinition;
+  faDollarSign = faDollarSign;
   lineData;
-  constructor(private gitService: GitservicesService ) {
+  text: string;
+
+  constructor(private gitService: GitservicesService,private themeService:ThemeService ) {
    
    }
+   
    findProfile(){
      this.gitService.updateProfile(this.username);
      this.gitService.getProfileDetails().subscribe(profile=>{
@@ -51,6 +63,30 @@ export class ProfileComponent implements OnInit {
      
    }
   ngOnInit(): void {
+    this.faLightbulb = faRegularLightbulb;
   }
 
-}
+    
+  setLightbulb() {
+    if (this.themeService.isDarkTheme()) {
+      this.faLightbulb = faRegularLightbulb;
+    } else {
+      this.faLightbulb = faSolidLightbulb;
+    }
+  }
+
+  toggleTheme() {
+    if (this.themeService.isDarkTheme()) {
+      console.log("Theme Switch");
+      this.themeService.setLightTheme();
+    } else {
+      this.themeService.setDarkTheme();
+      console.log("Theme swithc to dark");
+    }
+
+    this.setLightbulb();
+  }
+  }
+ 
+
+

@@ -1,23 +1,45 @@
 .search-form{
     display: flex;
     justify-content: center;;
-    padding-top: 50px;
+    //padding-top: 50px;
     text-align: center;
 }
 .container{
     padding: 10px;
 }
+body {
+     
+    .ui-inputtext {
+      &:enabled {
+        &:hover {
+          &:not(.ui-state-error) {
+            border-color: #007bff;
+          }
+        }
+        &:focus {
+          &:not(.ui-state-error) {
+            border-color: #00a8eb;
+          }
+        }
+      }
+      border-color: #007bff;
+      border-radius: 3px;
+    }
+  }
 .card{
     border: none !important;
 }
- .card-body{
-    border-radius: 27px;
-background: #fffffa;
-background-color:#f8f9fa !important;
-box-shadow:  10px 10px 20px #d4d4d0, 
-             -10px -10px 20px #ffffff;
+//  .card-body{
+//     border-radius: 27px;
+//     background: #fffffa;
+//     //background-color:#f8f9fa !important;
+//     //background-color: var (--background-card)!important;
+//     box-shadow:  10px 10px 20px #d4d4d0, 
+//                 -10px -10px 20px #ffffff;
     
-    
+// }
+.fa{
+    color:#777;
 }
 .form-group{
     padding: 10px 40px 10px 40px;

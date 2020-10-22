@@ -1,6 +1,14 @@
+
+<div class="d-flex justify-content-center">
+  <span>
+    <button class="btn"  (click)="toggleTheme()"><i class="fa fa-lightbulb-o fa-1x"></i></button>
+  </span>  
+  <div class="mr-2"></div>
+  <h2 class="normal"  style="display: inline-block !important; font-family:font-montserrat-bold-italic ;">Git Guide</h2>
+</div>
 <form action="" class="search-form">
   <div class="form-group">
-    <input
+    <!-- <input
       type="text"
       class="form-control"
       placeholder="Enter a username"
@@ -8,9 +16,19 @@
       name="username"
       (keyup.enter)="findProfile()"
     />
-  </div>
+   -->
+   <span class="ui-float-label">
+       <input id="float-input" type="text" size="30" pInputText class="form-control" placeholder="Enter a username"
+       [(ngModel)]="username"
+       name="username"
+      
+       (keyup.enter)="findProfile()">
+      
+   </span>
+</div>
 </form>
 <div class="container mt-3">
+  
   <div *ngIf="profile">
     <div>
       <div>
@@ -23,7 +41,7 @@
               class="rounded-circle img img-fluid mb-2"
               alt="avatar"
             />
-            <div class="mb-2">
+            <div class="mb-2 desc">
               {{ profile.name }} <small>{{ profile.login }}</small
               ><br />
               <span *ngIf="profile.company"
@@ -73,6 +91,7 @@
           <div class="col-sm-9">
             <div class="row">
               <div *ngFor="let repo of repos" class="card col-sm-5 mb-4 ml-3">
+              
                 <div class="card-body">
                   <span class="badge badge-primary">{{ repo.language }}</span>
                   <h3 class="mr-5">{{ repo.name }}</h3>
@@ -80,8 +99,8 @@
                     {{ repo.description }}
                   </p>
                   
-                  <a href="{{repo.html_url}}">View Repository</a><br>
-                  <small class="text-secondary"
+                  <a href="{{repo.html_url}}" target="_blank" class="repo_url" style="color:#add8e6">View Repository</a><br> 
+                  <small class="text-secondary d"
                     > Created:{{
                       repo.created_at | date
                     }} &nbsp;
@@ -91,6 +110,7 @@
                     </small
                   >
                 </div>
+              
               </div>
             </div>
           </div>

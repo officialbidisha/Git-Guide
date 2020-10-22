@@ -1,1 +1,65 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+:root{
+    --background-light:#ffffff;
+    // --background-card: #f8f9fa;
+    --color-scheme:['#ff3333','#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5'];
+    --stroke-color:#e4e4e4;
+    --weatherDiv-color:#ffffff;
+    --normalcolors:#000000;
+    --chartfiller:#000000;
+    --fillpath:#000000;
+    --radii:0px;
+    --width:3px;
+    
+}
+
+.border{
+    background-color:var(--weatherDiv-color) !important;
+    border-radius: var(--radii)!important;
+    border-width: var(--width)!important;
+}
+.card-body{
+    background-color:var(--background-card) !important;
+    
+}
+.repo_url{
+    color:var(--repourl) !important;
+}
+.card:hover{
+    filter: brightness(110%);
+}
+.card-body h3,p{
+    color:var(--card-body-h3) !important;
+}
+.d{
+    color:var(--spand) !important;
+}
+body {
+    background-color: var(--background-light);
+    margin: 0;font-family:font-montserrat-extrabold !important;
+  }
+  
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    // font-family: "PT Sans", sans-serif;
+    height:100%;
+  }
+  
+.charts{
+    display:grid;
+}
+.normal{
+    color: var(--heading);
+}
+.badge{
+    color: var(--badge-color);
+}
+.card{
+    background-color: var(--card-outside-color) !important;
+}
+.desc{
+    color: var(--badge-color);
+}

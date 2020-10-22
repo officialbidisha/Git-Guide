@@ -6,8 +6,11 @@ import { ProfileComponent } from './profile/profile.component';
 import { GitservicesService} from './gitservices.service';
 import { HttpClientModule } from '@angular/common/http';
 import {ChartModule} from 'primeng/chart';
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { far } from '@fortawesome/free-regular-svg-icons';
+
 
 @NgModule({
   declarations: [
@@ -19,7 +22,10 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ChartModule
+    ChartModule,
+    
+    FontAwesomeModule
+    
   ],
   providers: [GitservicesService],
   bootstrap: [AppComponent]
