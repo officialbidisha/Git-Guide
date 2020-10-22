@@ -7,6 +7,7 @@ import {
   IconDefinition
 } from "@fortawesome/free-solid-svg-icons";
 import { faLightbulb as faRegularLightbulb } from "@fortawesome/free-regular-svg-icons";
+import { ResourceLoader } from '@angular/compiler';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -42,28 +43,70 @@ export class ProfileComponent implements OnInit {
      console.log(this.repository);
      this.gitService.getWeekelyDetails(this.repository).subscribe((result:any)=>{
       console.log(result);
+      let datew:Array<number>=[]
+      let add: Array<number>=[];
+      let del: Array<number>=[];
+      let commit:Array<number>=[];
+      for(var i=0;i<(result[0].weeks.length);i++){
+        //  console.log("Hey additon ");
+        //  console.log(typeof(result[0].weeks[i].a));
+          datew.push(i);
+          add.push(result[0].weeks[i].a);
+          del.push(result[0].weeks[i].d);
+          commit.push(result[0].weeks[i].c);
+      }
+      // console.log(add);
+      // console.log(del);
+      // console.log(commit);
       this.lineData = {
-        //labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+
+       labels: datew,
         
         datasets: [
           {
-            label: 'Commits',
-            data: result[result.length-1]?.days,
+            label:'addition',    
+            data: add,
             backgroundColor: '#00a8eb',
-            borderColor: 'rgba(179,181,198,1)',
+            borderColor: '#FF1493',
             pointBackgroundColor: '#007bff',
             pointBorderColor: '#fff',
             pointHoverBackgroundColor: '#ffc600',
             pointHoverBorderColor: 'rgba(179,181,198,1)',
-            fill: true
+            fill: false
+          },
+          {
+            label:'deletion',
+            data: del,
+            backgroundColor: '#00a8eb',
+            borderColor: '#F19A3E',
+            pointBackgroundColor: '#007bff',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#ffc600',
+            pointHoverBorderColor: 'rgba(179,181,198,1)',
+            fill: false
+          },
+          {
+            label:'commits',
+            data: commit,
+            backgroundColor: '#00a8eb',
+            borderColor: '#dcfe00',
+            pointBackgroundColor: '#007bff',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#ffc600',
+            pointHoverBorderColor: 'rgba(179,181,198,1)',
+            fill: false
           }
+
+          
         ]
+
       };
      })
      
    }
   ngOnInit(): void {
-    this.faLightbulb = faRegularLightbulb;
+    this.toggleTheme();
+    this.toggleTheme();
   }
 
     

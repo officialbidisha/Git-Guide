@@ -24,6 +24,6 @@ export class GitservicesService {
     this.username=username;
   }
   getWeekelyDetails(reponame){
-    return this.http.get("https://api.github.com/repos/"+this.username+"/"+reponame+"/stats/commit_activity")
+    return this.http.get("https://api.github.com/repos/"+this.username+"/"+reponame+"/stats/contributors")
   }
 }

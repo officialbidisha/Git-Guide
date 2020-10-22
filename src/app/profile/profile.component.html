@@ -82,9 +82,10 @@
             <!-- <option selected>Select Repository</option> -->
             <option [value]="repo.name" *ngFor = "let repo of repos">{{repo.name}}</option>
           </select>
+          <div class="mb-3"></div>
           <!--chart-->
           <p-toast [style]="{marginTop: '80px'}"></p-toast>
-          <p-chart type="line" [data]="lineData" (onDataSelect)="selectData($event)"></p-chart>
+          <p-chart type="line" width="800" height="200" [data]="lineData" (onDataSelect)="selectData($event)"></p-chart>
           </div>
           <!--first chart-->
 
