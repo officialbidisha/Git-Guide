@@ -8,8 +8,8 @@ import {HttpClient} from '@angular/common/http';
 })
 export class GitservicesService {
    public username:string;
-   public clientId='ed1c379ecbdfb4f7cf88';
-   public clientSecret='bd88d1ee2edaf7299db247947ebfb528110984c8';
+   public clientId='__';
+   public clientSecret='__';
   constructor(private http:HttpClient) { 
     console.log("Service is now ready");
     this.username='officialbidisha';
