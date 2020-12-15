@@ -1,6 +1,12 @@
 # Gitguide
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.6.
+It shows the Git Commits, Addition, Deletion per repository of any user.
+It also shows the Repository along with the number of forks, creation date and last push date of the repository.
+
+![image](https://raw.githubusercontent.com/officialbidisha/Screenshots/master/screely-1608042861310.png)
+![image](https://raw.githubusercontent.com/officialbidisha/Screenshots/master/screely-1608043188253.png)
+![image](https://raw.githubusercontent.com/officialbidisha/Screenshots/master/screely-1608042793121.png)
 
 ## Development server
 
