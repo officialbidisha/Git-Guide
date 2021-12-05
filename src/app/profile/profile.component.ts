@@ -45,7 +45,6 @@ export class ProfileComponent implements OnInit {
           this.isLoading = false;
         },
         (err) => {
-          debugger;
           console.log(err);
           this.isLoading = false;
           this.error = true;
