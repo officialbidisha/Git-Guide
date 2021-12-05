@@ -1,122 +1,167 @@
-
-<div class="d-flex justify-content-center">
-  <span>
-    <button class="btn"  (click)="toggleTheme()"><i class="fa fa-lightbulb-o fa-1x"></i></button>
-  </span>  
-  <div class="mr-2"></div>
-  <h2 class="normal"  style="display: inline-block !important; font-family:font-montserrat-bold-italic ;">Git Guide</h2>
-</div>
-<form action="" class="search-form">
-  <div class="form-group">
-    <!-- <input
-      type="text"
-      class="form-control"
-      placeholder="Enter a username"
-      [(ngModel)]="username"
-      name="username"
-      (keyup.enter)="findProfile()"
-    />
-   -->
-   <span class="ui-float-label">
-       <input id="float-input" type="text" size="30" pInputText class="form-control" placeholder="Enter a username"
-       [(ngModel)]="username"
-       name="username"
-      
-       (keyup.enter)="findProfile()">
-      
-   </span>
-</div>
-</form>
-<div class="container mt-3">
-  
-  <div *ngIf="profile">
-    <div>
+<div class="profile">
+  <p-toast></p-toast>
+  <div class="d-flex" style="justify-content: space-around">
+    <div class="mr-2"></div>
+    <h2
+      class="normal"
+      style="
+        display: inline-block !important;
+        font-family: font-montserrat-bold-italic;
+        color: #007bff;
+      "
+    >
+      Git Guide
+    </h2>
+    <span style="display: flex; justify-content: center; align-items: center">
+      <label class="switch">
+        <input type="checkbox" (click)="toggleTheme()" />
+        <span class="slider round"></span>
+      </label>
+    </span>
+  </div>
+  <form action="" class="search-form">
+    <div class="form-group">
+      <span class="ui-float-label">
+        <input
+          id="float-input"
+          type="text"
+          size="30"
+          pInputText
+          class="form-control"
+          placeholder="Enter a username and enter"
+          [(ngModel)]="username"
+          name="username"
+          (keyup.enter)="findProfile()"
+        />
+      </span>
+    </div>
+  </form>
+  <div class="container mt-3" style="display: flex; justify-content: center; align-items: center;">
+    <div *ngIf="!isLoading && !profile && !error" style="width:inherit;">
+      <p style="width: inherit; text-align: center;
+      width: inherit;
+      color: #007bff !important;
+      font-size: 20px;
+      font-family: inherit;">
+        Enter an username to find the summary of the user's github repository.
+        <img src="../../assets/search-image.gif" style="width: inherit; border-radius: 10px;">
+      </p>
+    </div>
+    <div *ngIf="isLoading">
+      <div class="loader">Loading..</div>
+    </div>
+    <div *ngIf="profile && !isLoading">
       <div>
-        <div class="row">
-          <div class="col-sm-3">
-            <img
-              src="{{ profile.avatar_url }}"
-              width="250px"
-              height="250px"
-              class="rounded-circle img img-fluid mb-2"
-              alt="avatar"
-            />
-            <div class="mb-2 desc">
-              {{ profile.name }} <small>{{ profile.login }}</small
-              ><br />
-              <span *ngIf="profile.company"
-                >Works at, {{ profile.company }}</span
-              >
-              {{ profile.location }}
-            </div>
-            <div>
-              <p>
-                <span class="badge badge-warning"
-                  >Followers {{ profile.followers }}</span
-                >&nbsp;
-                <span class="badge badge-primary"
-                  >Following {{ profile.following }}</span
-                >&nbsp;
-                <span class="badge badge-success"
-                  >Gists {{ profile.public_gists }}</span
-                >&nbsp;
-                <span class="badge badge-info"
-                  >Public Repos {{ profile.public_repos }}</span
+        <div>
+          <div class="row">
+            <div class="col-sm-3">
+              <img
+                src="{{ profile.avatar_url }}"
+                width="250px"
+                height="250px"
+                class="rounded-circle img img-fluid mb-2"
+                alt="avatar"
+              />
+              <div class="mb-2 desc">
+                {{ profile.name }} <small>{{ profile.login }}</small
+                ><br />
+                <span *ngIf="profile.company"
+                  >Works at, {{ profile.company }}</span
                 >
-              </p>
-            </div>
-            <ul class="list-group">
-              <li  *ngIf="profile.bio" class="list-group-item">{{ profile.bio }}</li>
-              <li *ngIf="profile.blog" class="list-group-item">
-                <a class="text-break" href="https://{{ profile.blog }}"
-                  >https://{{ profile.blog }}</a
-                >
-              </li>
-              <li *ngIf="profile.email" class="list-group-item">
-                {{ profile.email }}
-              </li>
-            </ul>
-          <select class="form-control" id="sel1" [(ngModel)]="repository"
-          name="repository"
-          (change)="onChange()">
-            <!-- <option selected>Select Repository</option> -->
-            <option [value]="repo.name" *ngFor = "let repo of repos">{{repo.name}}</option>
-          </select>
-          <div class="mb-3"></div>
-          <!--chart-->
-          <p-toast [style]="{marginTop: '80px'}"></p-toast>
-          <p-chart type="line" width="800" height="200" [data]="lineData" (onDataSelect)="selectData($event)"></p-chart>
-          </div>
-          <!--first chart-->
-
-          <div class="col-sm-9">
-            <div class="row">
-              <div *ngFor="let repo of repos" class="card col-sm-5 mb-4 ml-3">
-              
-                <div class="card-body">
-                  <span class="badge badge-primary">{{ repo.language }}</span>
-                  <h3 class="mr-5">{{ repo.name }}</h3>
-                  <p>
-                    {{ repo.description }}
-                  </p>
-                  
-                  <a href="{{repo.html_url}}" target="_blank" class="repo_url" style="color:#add8e6">View Repository</a><br> 
-                  <small class="text-secondary d"
-                    > Created:{{
-                      repo.created_at | date
-                    }} &nbsp;
-                    Updated:{{repo.updated_at | date}} &nbsp;
-                    Push:{{repo.pushed_at |date}} &nbsp;
-                    Forks:{{repo.forks_count}}
-                    </small
+                {{ profile.location }}
+              </div>
+              <div>
+                <p>
+                  <span class="badge badge-warning"
+                    >Followers {{ profile.followers }}</span
+                  >&nbsp;
+                  <span class="badge badge-primary"
+                    >Following {{ profile.following }}</span
+                  >&nbsp;
+                  <span class="badge badge-success"
+                    >Gists {{ profile.public_gists }}</span
+                  >&nbsp;
+                  <span class="badge badge-info"
+                    >Public Repos {{ profile.public_repos }}</span
                   >
+                </p>
+              </div>
+              <ul class="list-group">
+                <li *ngIf="profile.bio" class="list-group-item">
+                  {{ profile.bio }}
+                </li>
+                <li *ngIf="profile.blog" class="list-group-item">
+                  <a class="text-break" href="https://{{ profile.blog }}"
+                    >https://{{ profile.blog }}</a
+                  >
+                </li>
+                <li *ngIf="profile.email" class="list-group-item">
+                  {{ profile.email }}
+                </li>
+              </ul>
+              <select
+                class="form-control"
+                id="sel1"
+                [(ngModel)]="repository"
+                name="repository"
+                (change)="onChange()"
+              >
+                <!-- <option selected>Select Repository</option> -->
+                <option [value]="repo.name" *ngFor="let repo of repos">
+                  {{ repo.name }}
+                </option>
+              </select>
+              <div class="mb-3"></div>
+              <!--chart-->
+              <p-toast [style]="{ marginTop: '80px' }"></p-toast>
+              <p-chart
+                type="line"
+                width="800"
+                height="200"
+                [data]="lineData"
+                (onDataSelect)="selectData($event)"
+              ></p-chart>
+            </div>
+            <!--first chart-->
+
+            <div class="col-sm-9">
+              <div class="row">
+                <div *ngFor="let repo of repos" class="card col-sm-5 mb-4 ml-3">
+                  <div class="card-body">
+                    <span class="badge badge-primary">{{ repo.language }}</span>
+                    <h3 class="mr-5">{{ repo.name }}</h3>
+                    <p>
+                      {{ repo.description }}
+                    </p>
+
+                    <a
+                      href="{{ repo.html_url }}"
+                      target="_blank"
+                      class="repo_url"
+                      style="color: #add8e6"
+                      >View Repository</a
+                    ><br />
+                    <small class="text-secondary d">
+                      Created:{{ repo.created_at | date }} &nbsp; Updated:{{
+                        repo.updated_at | date
+                      }}
+                      &nbsp; Push:{{ repo.pushed_at | date }} &nbsp; Forks:{{
+                        repo.forks_count
+                      }}
+                    </small>
+                  </div>
                 </div>
-              
               </div>
             </div>
+            <div class="col-sm-3"></div>
           </div>
-          <div class="col-sm-3"></div>
         </div>
+      </div>
+
+    </div>
+    <div *ngIf="!isLoading && error === true" style="width: inherit">
+      <div style="width:inherit;">
+        <img src="../../assets/sorry.gif" style="width:inherit">
       </div>
     </div>
   </div>

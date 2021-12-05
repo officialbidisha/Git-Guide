@@ -7,58 +7,95 @@ import {
   IconDefinition,
 } from '@fortawesome/free-solid-svg-icons';
 import { faLightbulb as faRegularLightbulb } from '@fortawesome/free-regular-svg-icons';
+import { MessageService } from 'primeng/api';
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
+  providers: [MessageService],
 })
 export class ProfileComponent implements OnInit {
-  profile;
-  repos;
-  username: string;
-  repository: string;
-  faLightbulb: IconDefinition;
-  faDollarSign = faDollarSign;
-  lineData;
+  public profile: string = null;
+  public error: boolean = false;
+  public repos;
+  public username: string;
+  public repository: string;
+  public faLightbulb: IconDefinition;
+  public faDollarSign = faDollarSign;
+  public lineData;
+  public isLoading: boolean = false;
   text: string;
 
   constructor(
     private gitService: GitservicesService,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    private messageService: MessageService
   ) {}
 
-  findProfile() {
-    this.gitService.updateProfile(this.username);
-    this.gitService.getProfileDetails().subscribe((profile) => {
-      console.log(profile);
-      this.profile = profile;
-    });
-    this.gitService.getRepoDetails().subscribe((repos) => {
-      console.log(repos);
-      this.repos = repos;
-    });
+  public findProfile() {
+    this.error = false;
+    this.isLoading = true;
+    this.profile= null;
+    setTimeout(() => {
+      this.gitService.updateProfile(this.username);
+      this.gitService.getProfileDetails().subscribe(
+        (profile) => {
+          this.profile = profile;
+          this.isLoading = false;
+        },
+        (err) => {
+          debugger;
+          console.log(err);
+          this.isLoading = false;
+          this.error = true;
+          if (err.error.message === 'Not Found') {
+            this.messageService.add({
+              severity: 'error',
+              summary: err.error.message,
+              detail: 'Username invalid',
+            });
+          }
+          if (err.status === 0) {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Network connectivity issue',
+              detail: 'Check your internet connection',
+            });
+          }
+          if(err.error.status===500){
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Server Error',
+              detail: 'Internal Server Error',
+            });
+          }
+        }
+      );
+      this.gitService.getRepoDetails().subscribe((repos) => {
+        console.log(repos);
+        this.repos = repos;
+      });
+    }, 5000);
   }
-  onChange() {
-    console.log(this.repository);
+  public onChange(): void {
     this.gitService
       .getWeekelyDetails(this.repository)
       .subscribe((result: any) => {
         console.log(result);
-        let datew: Array<number> = [];
-        let add: Array<number> = [];
-        let del: Array<number> = [];
-        let commit: Array<number> = [];
-        for (var i = 0; i < result[0].weeks.length; i++) {
-          //  console.log("Hey additon ");
-          //  console.log(typeof(result[0].weeks[i].a));
+        const datew: Array<number> = [];
+        const add: Array<number> = [];
+        const del: Array<number> = [];
+        const commit: Array<number> = [];
+        for (let i = 0; i < result[0]?.weeks.length; i++) {
           datew.push(i);
-          add.push(result[0].weeks[i].a);
-          del.push(result[0].weeks[i].d);
-          commit.push(result[0].weeks[i].c);
+          add.push(result[0]?.weeks[i].a);
+          del.push(result[0]?.weeks[i].d);
+          commit.push(result[0]?.weeks[i].c);
         }
-        // console.log(add);
-        // console.log(del);
-        // console.log(commit);
+        console.log(add);
+        console.log(del);
+        console.log(commit);
         this.lineData = {
           labels: datew,
 
@@ -105,7 +142,7 @@ export class ProfileComponent implements OnInit {
     this.toggleTheme();
   }
 
-  setLightbulb() {
+  public setLightbulb(): void {
     if (this.themeService.isDarkTheme()) {
       this.faLightbulb = faRegularLightbulb;
     } else {
@@ -113,13 +150,11 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  toggleTheme() {
+  public toggleTheme(): void {
     if (this.themeService.isDarkTheme()) {
-      console.log('Theme Switch');
       this.themeService.setLightTheme();
     } else {
       this.themeService.setDarkTheme();
-      console.log('Theme swithc to dark');
     }
 
     this.setLightbulb();

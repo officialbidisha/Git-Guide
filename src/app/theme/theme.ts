@@ -21,7 +21,7 @@ export const light: Theme = {
     '--chartfiller': '#0000000',
     '--fillpath': '000000',
     '--radii': '0px',
-    '--width': '3px'
+    '--width': '3px',
     
   }
 };
@@ -46,6 +46,5 @@ export const dark: Theme = {
     '--fillpath': '#ffffff',
     '--radii': '0x',
     '--width': '30px',
-    
   }
 };
