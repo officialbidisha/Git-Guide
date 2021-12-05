@@ -491,20 +491,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 class GitservicesService {
     constructor(http) {
         this.http = http;
         this.clientId = 'ed1c379ecbdfb4f7cf88';
         this.clientSecret = 'f7ff42188f369a3aa48cfa3601817f8144585efb';
-        this.headerDict = {
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-            'Access-Control-Allow-Headers': 'Content-Type',
-        };
-        this.requestOptions = {
-            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"](this.headerDict),
-        };
         console.log('Service is now ready');
         this.username = 'officialbidisha';
     }
@@ -514,7 +505,7 @@ class GitservicesService {
             '?client_id=' +
             this.clientId +
             '&client_secret=' +
-            this.clientSecret, this.requestOptions);
+            this.clientSecret);
     }
     getRepoDetails() {
         return this.http.get('http://api.github.com/users/' +
@@ -522,17 +513,17 @@ class GitservicesService {
             '/repos?client_id=' +
             this.clientId +
             'client_secret=' +
-            this.clientSecret, this.requestOptions);
+            this.clientSecret);
     }
     updateProfile(username) {
         this.username = username;
     }
     getWeekelyDetails(reponame) {
-        return this.http.get('https://api.github.com/repos/' +
+        return this.http.get('http://api.github.com/repos/' +
             this.username +
             '/' +
             reponame +
-            '/stats/contributors', this.requestOptions);
+            '/stats/contributors');
     }
 }
 GitservicesService.ɵfac = function GitservicesService_Factory(t) { return new (t || GitservicesService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"])); };
