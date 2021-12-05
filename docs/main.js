@@ -491,11 +491,20 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 class GitservicesService {
     constructor(http) {
         this.http = http;
         this.clientId = 'ed1c379ecbdfb4f7cf88';
         this.clientSecret = 'f7ff42188f369a3aa48cfa3601817f8144585efb';
+        this.headerDict = {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            'Access-Control-Allow-Headers': 'Content-Type',
+        };
+        this.requestOptions = {
+            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"](this.headerDict),
+        };
         console.log('Service is now ready');
         this.username = 'officialbidisha';
     }
@@ -505,7 +514,7 @@ class GitservicesService {
             '?client_id=' +
             this.clientId +
             '&client_secret=' +
-            this.clientSecret);
+            this.clientSecret, this.requestOptions);
     }
     getRepoDetails() {
         return this.http.get('http://api.github.com/users/' +
@@ -513,7 +522,7 @@ class GitservicesService {
             '/repos?client_id=' +
             this.clientId +
             'client_secret=' +
-            this.clientSecret);
+            this.clientSecret, this.requestOptions);
     }
     updateProfile(username) {
         this.username = username;
@@ -523,7 +532,7 @@ class GitservicesService {
             this.username +
             '/' +
             reponame +
-            '/stats/contributors');
+            '/stats/contributors', this.requestOptions);
     }
 }
 GitservicesService.ɵfac = function GitservicesService_Factory(t) { return new (t || GitservicesService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"])); };
@@ -911,7 +920,7 @@ class ProfileComponent {
     }
 }
 ProfileComponent.ɵfac = function ProfileComponent_Factory(t) { return new (t || ProfileComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_gitservices_service__WEBPACK_IMPORTED_MODULE_4__["GitservicesService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_theme_theme_service__WEBPACK_IMPORTED_MODULE_5__["ThemeService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](primeng_api__WEBPACK_IMPORTED_MODULE_3__["MessageService"])); };
-ProfileComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: ProfileComponent, selectors: [["app-profile"]], features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵProvidersFeature"]([primeng_api__WEBPACK_IMPORTED_MODULE_3__["MessageService"]])], decls: 19, vars: 5, consts: [[1, "profile"], [1, "d-flex", 2, "justify-content", "space-around"], [1, "mr-2"], [1, "normal", 2, "display", "inline-block !important", "font-family", "font-montserrat-bold-italic", "color", "#007bff"], [2, "display", "flex", "justify-content", "center", "align-items", "center"], [1, "switch"], ["type", "checkbox", 3, "click"], [1, "slider", "round"], ["action", "", 1, "search-form"], [1, "form-group"], [1, "ui-float-label"], ["id", "float-input", "type", "text", "size", "30", "pInputText", "", "placeholder", "Enter a username and enter", "name", "username", 1, "form-control", 3, "ngModel", "ngModelChange", "keyup.enter"], [1, "container", "mt-3", 2, "display", "flex", "justify-content", "center", "align-items", "center"], ["style", "width:inherit;", 4, "ngIf"], [4, "ngIf"], ["style", "width: inherit", 4, "ngIf"], [2, "width", "inherit"], [2, "width", "inherit", "text-align", "center", "width", "inherit", "color", "#007bff !important", "font-size", "20px", "font-family", "inherit"], ["src", "../../../src/assets/search-image.gif", 2, "width", "inherit", "border-radius", "10px"], [1, "loader"], [1, "row"], [1, "col-sm-3"], ["width", "250px", "height", "250px", "alt", "avatar", 1, "rounded-circle", "img", "img-fluid", "mb-2", 3, "src"], [1, "mb-2", "desc"], [1, "badge", "badge-warning"], [1, "badge", "badge-primary"], [1, "badge", "badge-success"], [1, "badge", "badge-info"], [1, "list-group"], ["class", "list-group-item", 4, "ngIf"], ["id", "sel1", "name", "repository", 1, "form-control", 3, "ngModel", "ngModelChange", "change"], [3, "value", 4, "ngFor", "ngForOf"], [1, "mb-3"], ["type", "line", "width", "800", "height", "200", 3, "data", "onDataSelect"], [1, "col-sm-9"], ["class", "card col-sm-5 mb-4 ml-3", 4, "ngFor", "ngForOf"], [1, "list-group-item"], [1, "text-break", 3, "href"], [3, "value"], [1, "card", "col-sm-5", "mb-4", "ml-3"], [1, "card-body"], [1, "mr-5"], ["target", "_blank", 1, "repo_url", 2, "color", "#add8e6", 3, "href"], [1, "text-secondary", "d"], ["src", "../../assets/sorry.gif", 2, "width", "inherit"]], template: function ProfileComponent_Template(rf, ctx) { if (rf & 1) {
+ProfileComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: ProfileComponent, selectors: [["app-profile"]], features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵProvidersFeature"]([primeng_api__WEBPACK_IMPORTED_MODULE_3__["MessageService"]])], decls: 19, vars: 5, consts: [[1, "profile"], [1, "d-flex", 2, "justify-content", "space-around"], [1, "mr-2"], [1, "normal", 2, "display", "inline-block !important", "font-family", "font-montserrat-bold-italic", "color", "#007bff"], [2, "display", "flex", "justify-content", "center", "align-items", "center"], [1, "switch"], ["type", "checkbox", 3, "click"], [1, "slider", "round"], ["action", "", 1, "search-form"], [1, "form-group"], [1, "ui-float-label"], ["id", "float-input", "type", "text", "size", "30", "pInputText", "", "placeholder", "Enter a username and enter", "name", "username", 1, "form-control", 3, "ngModel", "ngModelChange", "keyup.enter"], [1, "container", "mt-3", 2, "display", "flex", "justify-content", "center", "align-items", "center"], ["style", "width:inherit;", 4, "ngIf"], [4, "ngIf"], ["style", "width: inherit", 4, "ngIf"], [2, "width", "inherit"], [2, "width", "inherit", "text-align", "center", "width", "inherit", "color", "#007bff !important", "font-size", "20px", "font-family", "inherit"], ["src", "../../assets/search-image.gif", 2, "width", "inherit", "border-radius", "10px"], [1, "loader"], [1, "row"], [1, "col-sm-3"], ["width", "250px", "height", "250px", "alt", "avatar", 1, "rounded-circle", "img", "img-fluid", "mb-2", 3, "src"], [1, "mb-2", "desc"], [1, "badge", "badge-warning"], [1, "badge", "badge-primary"], [1, "badge", "badge-success"], [1, "badge", "badge-info"], [1, "list-group"], ["class", "list-group-item", 4, "ngIf"], ["id", "sel1", "name", "repository", 1, "form-control", 3, "ngModel", "ngModelChange", "change"], [3, "value", 4, "ngFor", "ngForOf"], [1, "mb-3"], ["type", "line", "width", "800", "height", "200", 3, "data", "onDataSelect"], [1, "col-sm-9"], ["class", "card col-sm-5 mb-4 ml-3", 4, "ngFor", "ngForOf"], [1, "list-group-item"], [1, "text-break", 3, "href"], [3, "value"], [1, "card", "col-sm-5", "mb-4", "ml-3"], [1, "card-body"], [1, "mr-5"], ["target", "_blank", 1, "repo_url", 2, "color", "#add8e6", 3, "href"], [1, "text-secondary", "d"], ["src", "../../assets/sorry.gif", 2, "width", "inherit"]], template: function ProfileComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](1, "p-toast");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "div", 1);
