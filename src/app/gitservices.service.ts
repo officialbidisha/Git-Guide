@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -9,6 +9,15 @@ export class GitservicesService {
   public username: string;
   public clientId = 'ed1c379ecbdfb4f7cf88';
   public clientSecret = 'f7ff42188f369a3aa48cfa3601817f8144585efb';
+  public headerDict = {
+    'Content-Type': 'application/json',
+    Accept: 'application/json',
+    'Access-Control-Allow-Headers': 'Content-Type',
+  };
+
+  public requestOptions = {
+    headers: new HttpHeaders(this.headerDict),
+  };
   constructor(private http: HttpClient) {
     console.log('Service is now ready');
     this.username = 'officialbidisha';
@@ -20,7 +29,8 @@ export class GitservicesService {
         '?client_id=' +
         this.clientId +
         '&client_secret=' +
-        this.clientSecret
+        this.clientSecret,
+        this.requestOptions
     );
   }
   public getRepoDetails(): Observable<any> {
@@ -30,7 +40,8 @@ export class GitservicesService {
         '/repos?client_id=' +
         this.clientId +
         'client_secret=' +
-        this.clientSecret
+        this.clientSecret,
+        this.requestOptions
     );
   }
   public updateProfile(username: string): void {
@@ -42,7 +53,8 @@ export class GitservicesService {
         this.username +
         '/' +
         reponame +
-        '/stats/contributors'
+        '/stats/contributors',
+        this.requestOptions
     );
   }
 }

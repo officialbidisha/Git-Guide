@@ -33,7 +33,7 @@ export class ProfileComponent implements OnInit {
     private messageService: MessageService
   ) {}
 
-  public findProfile() {
+  public findProfile(): void {
     this.error = false;
     this.isLoading = true;
     this.profile= null;
