@@ -500,7 +500,7 @@ class GitservicesService {
         this.username = 'officialbidisha';
     }
     getProfileDetails() {
-        return this.http.get('http://api.github.com/users/' +
+        return this.http.get('https://api.github.com/users/' +
             this.username +
             '?client_id=' +
             this.clientId +
@@ -508,7 +508,7 @@ class GitservicesService {
             this.clientSecret);
     }
     getRepoDetails() {
-        return this.http.get('http://api.github.com/users/' +
+        return this.http.get('https://api.github.com/users/' +
             this.username +
             '/repos?client_id=' +
             this.clientId +
@@ -519,7 +519,7 @@ class GitservicesService {
         this.username = username;
     }
     getWeekelyDetails(reponame) {
-        return this.http.get('http://api.github.com/repos/' +
+        return this.http.get('https://api.github.com/repos/' +
             this.username +
             '/' +
             reponame +
