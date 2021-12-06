@@ -16,7 +16,7 @@ export class GitservicesService {
   }
   public getProfileDetails(): Observable<any> {
     return this.http.get(
-      'http://api.github.com/users/' +
+      'https://api.github.com/users/' +
         this.username +
         '?client_id=' +
         this.clientId +
@@ -26,7 +26,7 @@ export class GitservicesService {
   }
   public getRepoDetails(): Observable<any> {
     return this.http.get(
-      'http://api.github.com/users/' +
+      'https://api.github.com/users/' +
         this.username +
         '/repos?client_id=' +
         this.clientId +
@@ -39,7 +39,7 @@ export class GitservicesService {
   }
   public getWeekelyDetails(reponame): Observable<any> {
     return this.http.get(
-      'http://api.github.com/repos/' +
+      'https://api.github.com/repos/' +
         this.username +
         '/' +
         reponame +
